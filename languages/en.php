@@ -1,0 +1,27 @@
+ <?php
+ $lang_dict = array(
+'Sign up to register your account and site with Disqus' => 'Sign up to register your account and site with Disqus',
+'Create a new site on Disqus' => 'Create a new site on Disqus',
+'Site Configuration' => 'Site Configuration',
+'Shortname' => 'Shortname',
+'Your site\'s unique identifier ' => 'Your site\'s unique identifier ',
+'What is this?' => 'What is this?',
+'Select Pages to show comments' => 'Select Pages to show comments',
+'Pages' => 'Pages',
+'Show comments?' => 'Show comments?',
+'Manage Community' => 'Manage Community',
+'Comments' => 'Comments',
+'Moderate' => 'Moderate',
+'Manage: ' => 'Manage: ',
+'Banned users' => 'Banned users',
+'Restricted words filter' => 'Restricted words filter',
+'Site moderators' => 'Site moderators',
+'Analytics' => 'Analytics',
+'Engagement' => 'Engagement',
+'Revenue' => 'Revenue',
+'Popular Content' => 'Popular Content',
+'Settings' => 'Settings',
+'General' => 'General',
+'Community Rules' => 'Community Rules',
+'Advanced' => 'Advanced'
+);
