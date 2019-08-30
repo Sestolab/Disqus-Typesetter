@@ -24,5 +24,5 @@ $lang_dict = array(
     'Settings' => 'Settings',
     'General' => 'General',
     'Community Rules' => 'Community Rules',
-    'Advanced' => 'Advanced',
+    'Advanced' => 'Advanced'
 );

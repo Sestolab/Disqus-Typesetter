@@ -10,45 +10,35 @@ class Admin{
 		$page->head_js[] = $addonRelativeCode.'/Disqus.js';
 		$page->css_admin[] = $addonRelativeCode.'/Disqus.css';
 		$lang = $this->getLang();
-		
+
 		$this->loadConfig();
-		
+
 		if(\common::GetCommand() == 'saveConfig')
 				$this->saveConfig();
 
 		echo '<p class="text-center"><img  src="'.$addonRelativeCode.'/img/disqus-logo-blue-white.svg'.'" /></p><br/>';
 		echo '<div class="disqus_frame" align="center">';
-		if ($this->disqus_forum_url == ''){
-			echo '<input type="radio" name="Disqus" id="Disqus_Site_Conf" checked/><label for="Disqus_Site_Conf">'.$lang['Site Configuration'].'</label>';
-			echo '<input type="radio" name="Disqus" id="Disqus_show_comments" disabled /><label for="Disqus_show_comments">'.$lang['Select Pages to show comments'].'</label>';
-			echo '<input type="radio" name="Disqus" id="Disqus_Manage" disabled /><label for="Disqus_Manage">'.$lang['Manage Community'].'</label>';
-		}else{
-			echo '<input type="radio" name="Disqus" id="Disqus_Site_Conf"/><label for="Disqus_Site_Conf">'.$lang['Site Configuration'].'</label>';
-			echo '<input type="radio" name="Disqus" id="Disqus_show_comments" checked/><label for="Disqus_show_comments">'.$lang['Select Pages to show comments'].'</label>';
-			echo '<input type="radio" name="Disqus" id="Disqus_Manage"/><label for="Disqus_Manage">'.$lang['Manage Community'].'</label>';
-		}
-
+		echo '<input type="radio" name="Disqus" id="Disqus_Site_Conf" '.($this->disqus_forum_url ? '' : 'checked').'/><label for="Disqus_Site_Conf">'.$lang['Site Configuration'].'</label>';
+		echo '<input type="radio" name="Disqus" id="Disqus_show_comments" '.($this->disqus_forum_url ? 'checked' : 'disabled').'/><label for="Disqus_show_comments">'.$lang['Select Pages to show comments'].'</label>';
+		echo '<input type="radio" name="Disqus" id="Disqus_Manage" '.($this->disqus_forum_url ? '' : 'disabled').'/><label for="Disqus_Manage">'.$lang['Manage Community'].'</label>';
 		echo '<div>';
 		echo '<form action="'.\common::GetUrl('Admin_Disqus').'" method="post">';
 		echo '<label for="disqus_forum_url">'.$lang['Shortname'].'</label><input id="disqus_forum_url" name="disqus_forum_url" class="gpinput" required readonly value="'.$this->disqus_forum_url.'">';
 		echo '<p>'.$lang['Your site\'s unique identifier'].' <a href="https://help.disqus.com/customer/portal/articles/466208" target="_blank">'.$lang['What is this?'].'</a></p>';
 		echo '<p><a id="edit_shortname"><span class="fa fa-lock"></span> '.$lang['Click to make changes'].'</a></p>';
-		if ($this->disqus_forum_url == ''){
-				echo '<p><a href="https://disqus.com/profile/signup/?next=https://disqus.com/admin/create/">'.$lang['Sign up to register your account and site with Disqus'].'</a></p>';
-				echo '<p><a href="https://disqus.com/admin/create/">'.$lang['Create a new site on Disqus'].'</a></p>';
+		if($this->disqus_forum_url == ''){
+			echo '<p><a href="https://disqus.com/profile/signup/?next=https://disqus.com/admin/create/">'.$lang['Sign up to register your account and site with Disqus'].'</a></p>';
+			echo '<p><a href="https://disqus.com/admin/create/">'.$lang['Create a new site on Disqus'].'</a></p>';
 		}
 		echo '</div>';
  		echo '<div><table class="comments_pages bordered"><col/><col/><tr><th>'.$lang['Pages'].'</th><th>'.$lang['Show comments?'].'</th></tr>';
-		foreach ($gp_index as $t=>$i) {
+		foreach($gp_index as $t=>$i){
 			echo '<tr><td>'.\gp\tool::Link_Page($t).'</td><td class="comment_selector">';
-				if (in_array($i, $this->pages_comments))
-					echo '<input id="'.$i.'" type="checkbox" checked name="pages_comments[]" value="'.$i.'" />';
-				else
-					echo '<input id="'.$i.'" type="checkbox" name="pages_comments[]" value="no" />';
+			echo '<input id="'.$i.'" type="checkbox" name="pages_comments[]" '.(in_array($i, $this->pages_comments) ? 'checked' : '').' value="'.$i.'"/>';
 			echo '</td></tr>';
 		}
   		echo '</table></div><div>';
-			
+
 		echo '<div>
 				<table class="full_width">
 					<tbody>
@@ -92,15 +82,13 @@ class Admin{
 
 	function saveConfig(){
 		global $addonPathData, $langmessage;
-		$config = array();
-	
 		$config['disqus_forum_url'] = $_POST['disqus_forum_url'];
-		$config['pages_comments'] = isset($_POST["pages_comments"]) ? $_POST["pages_comments"] : array();
-		
+		$config['pages_comments'] = isset($_POST['pages_comments']) ? $_POST['pages_comments'] : array();
+
 		$this->pages_comments = $config['pages_comments'];
 		$this->disqus_forum_url	= $config['disqus_forum_url'];
 
-		if( \gpFiles::SaveArray($addonPathData.'/config.php','config',$config) )
+		if(\gpFiles::SaveArray($addonPathData.'/config.php', 'config', $config))
 			return message($langmessage['SAVED']);
 		message($langmessage['OOPS']);
   	}

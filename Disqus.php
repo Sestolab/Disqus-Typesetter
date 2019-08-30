@@ -11,7 +11,7 @@ class Disqus{
 		if(file_exists($addonPathData.'/config.php'))
 			include_once $addonPathData.'/config.php';
 
-		if (!isset($config) || !in_array($page->gp_index, $config['pages_comments']))
+		if(!isset($config) || !in_array($page->gp_index, $config['pages_comments']))
 			return;
 
 		echo '<div id="disqus_thread"></div>';
