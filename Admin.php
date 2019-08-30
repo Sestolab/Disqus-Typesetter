@@ -6,10 +6,10 @@ defined('is_running') or die('Not an entry point...');
 class Admin{
 
 	function __construct(){
-		global $page, $addonRelativeCode, $langmessage, $gp_index;
+		global $page, $addonRelativeCode, $langmessage, $gp_index, $config, $addonPathCode;
 		$page->head_js[] = $addonRelativeCode.'/Disqus.js';
 		$page->css_admin[] = $addonRelativeCode.'/Disqus.css';
-		$lang = $this->getLang();
+		include file_exists($addonPathCode.'/languages/'.$config['language'].'.php') ? $addonPathCode.'/languages/'.$config['language'].'.php' : $addonPathCode.'/languages/en.php';
 
 		$this->loadConfig();
 
@@ -102,16 +102,5 @@ class Admin{
 		$this->disqus_forum_url = isset($config['disqus_forum_url']) ? $config['disqus_forum_url'] : '';
 		$this->pages_comments = isset($config['pages_comments']) ? $config['pages_comments'] : array();
   	}
-
-	function getLang(){
-		global $config;
-
-		if(file_exists(dirname(__FILE__).'/languages/'.$config['language'].'.php'))
-			include dirname(__FILE__).'/languages/'.$config['language'].'.php';
-		else
-			include dirname(__FILE__).'/languages/en.php';
-
-		return $lang_dict;
-	}
 
 }

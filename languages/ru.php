@@ -1,5 +1,5 @@
 <?php
-$lang_dict = array(
+$lang = array(
     'Sign up to register your account and site with Disqus' => 'Зарегистрируйтесь, чтобы зарегистрировать свою учетную запись и сайт с помощью Disqus',
     'Create a new site on Disqus' => 'Создать новый сайт на Disqus',
     'Site Configuration' => 'Конфигурация сайта',
