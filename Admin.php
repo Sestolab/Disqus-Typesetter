@@ -9,7 +9,7 @@ class Admin{
 		global $page, $addonRelativeCode, $langmessage, $gp_index, $config, $addonPathCode;
 		$page->head_js[] = $addonRelativeCode.'/Disqus.js';
 		$page->css_admin[] = $addonRelativeCode.'/Disqus.css';
-		include file_exists($addonPathCode.'/languages/'.$config['language'].'.php') ? $addonPathCode.'/languages/'.$config['language'].'.php' : $addonPathCode.'/languages/en.php';
+		$lang = \gpFiles::Get($addonPathCode.'/languages/'.$config['language'].'.php', 'lang') ?: \gpFiles::Get($addonPathCode.'/languages/en.php', 'lang');
 
 		$this->loadConfig();
 
@@ -95,10 +95,7 @@ class Admin{
 
   	function loadConfig(){
 		global $addonPathData;
-
-		if(file_exists($addonPathData.'/config.php'))
-			include_once  $addonPathData.'/config.php';
-
+		$config = \gpFiles::Get($addonPathData.'/config.php', 'config');
 		$this->disqus_forum_url = isset($config['disqus_forum_url']) ? $config['disqus_forum_url'] : '';
 		$this->pages_comments = isset($config['pages_comments']) ? $config['pages_comments'] : array();
   	}

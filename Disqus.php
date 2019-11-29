@@ -7,11 +7,9 @@ class Disqus{
 
 	function __construct(){
 		global $page, $addonPathData;
+		$config = \gpFiles::Get($addonPathData.'/config.php', 'config');
 
-		if(file_exists($addonPathData.'/config.php'))
-			include_once $addonPathData.'/config.php';
-
-		if(!isset($config) || !in_array($page->gp_index, $config['pages_comments']))
+		if(!$config || !in_array($page->gp_index, $config['pages_comments']))
 			return;
 
 		echo '<div id="disqus_thread"></div>';
