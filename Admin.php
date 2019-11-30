@@ -32,11 +32,12 @@ class Admin{
 		}
 		echo '</div>';
  		echo '<div><table class="comments_pages bordered"><col/><col/><tr><th>'.$lang['Pages'].'</th><th>'.$lang['Show comments?'].'</th></tr>';
-		foreach($gp_index as $t=>$i){
-			echo '<tr><td>'.\gp\tool::Link_Page($t).'</td><td class="comment_selector">';
-			echo '<input id="'.$i.'" type="checkbox" name="pages_comments[]" '.(in_array($i, $this->pages_comments) ? 'checked' : '').' value="'.$i.'"/>';
-			echo '</td></tr>';
-		}
+		foreach($gp_index as $t=>$i)
+			if (strpos($i, 'special_') === false){
+				echo '<tr><td>'.\gp\tool::Link_Page($t).'</td><td class="comment_selector">';
+				echo '<input id="'.$i.'" type="checkbox" name="pages_comments[]" '.(in_array($i, $this->pages_comments) ? 'checked' : '').' value="'.$i.'"/>';
+				echo '</td></tr>';
+			}
   		echo '</table></div><div>';
 
 		echo '<div>
