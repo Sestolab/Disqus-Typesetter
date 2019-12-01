@@ -24,5 +24,6 @@ $lang = array(
     'Settings' => 'Settings',
     'General' => 'General',
     'Community Rules' => 'Community Rules',
-    'Advanced' => 'Advanced'
+    'Advanced' => 'Advanced',
+    'noscriptmsg' => 'Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>'
 );

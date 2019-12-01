@@ -10,6 +10,7 @@ class Admin{
 		$page->head_js[] = $addonRelativeCode.'/Disqus.js';
 		$page->css_admin[] = $addonRelativeCode.'/Disqus.css';
 		$lang = \gpFiles::Get($addonPathCode.'/languages/'.$config['language'].'.php', 'lang') ?: \gpFiles::Get($addonPathCode.'/languages/en.php', 'lang');
+		$this->noscriptmsg = $lang['noscriptmsg'];
 
 		$this->loadConfig();
 
@@ -85,6 +86,7 @@ class Admin{
 		global $addonPathData, $langmessage;
 		$config['disqus_forum_url'] = $_POST['disqus_forum_url'];
 		$config['pages_comments'] = isset($_POST['pages_comments']) ? $_POST['pages_comments'] : array();
+		$config['noscriptmsg'] = $this->noscriptmsg;
 
 		$this->pages_comments = $config['pages_comments'];
 		$this->disqus_forum_url	= $config['disqus_forum_url'];

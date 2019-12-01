@@ -24,5 +24,6 @@ $lang = array(
     'Settings' => 'Настройки',
     'General' => 'Общие',
     'Community Rules' => 'Правила сообщества',
-    'Advanced' => 'Расширенные'
+    'Advanced' => 'Расширенные',
+    'noscriptmsg' => 'Пожалуйста, включите JavaScript для просмотра <a href="https://disqus.com/?ref_noscript">комментариев на основе Disqus.</a>'
 );
